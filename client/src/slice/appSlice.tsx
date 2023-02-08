@@ -3,32 +3,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
 import axios from "axios"
 
-// export const getData = createAsyncThunk(
-//   "data/Get",
-//   async (
-//     {
-//       status,
-//       type,
-//       date = "",
-//       limit = 7,
-//       offset = 0,
-//     }: { status: string; type: string; date?: string; limit?: number; offset?: number },
-//     { rejectWithValue }
-//   ) => {
-//     try {
-//       const response = await axios({
-//         method: "GET",
-//         headers: { "Content-Type": "application/json", Accept: "application/json" },
-//         url: `https://api.spacexdata.com/v3/capsules?status=${status}&original_launch=${date}&type=${type}&limit=${limit}&offset=${offset}`,
-//         params: { prompt: prompt },
-//       })
-//       return response
-//     } catch (error) {
-//       return rejectWithValue(error)
-//     }
-//   }
-// )
-
 export const getData = createAsyncThunk(
   "data/Get",
   async (
@@ -56,7 +30,7 @@ export const getData = createAsyncThunk(
         url: "http://localhost:3001/data",
         params: params,
       })
-      console.log(response)
+
       return response
     } catch (error) {
       return rejectWithValue(error)
@@ -165,28 +139,6 @@ const getDate = createSlice({
       })
   },
 })
-
-// export const selectDropShadowTabs = createSelector(
-//   (state: RootState) => state.dropShadow,
-//   dropShadow =>
-//     dropShadow.dropShadowData.map((z, i) => ({
-//       name: z.tabName,
-//       id: z.id,
-//       index: i,
-//     }))
-// )
-
-// export const selectDropShadowStyle = createSelector(
-//   (state: RootState) => state.dropShadow.dropShadowData,
-//   dropShadowData => {
-//     return dropShadowData.map(
-//       data =>
-//         `${data.settings.horizontal}px ${data.settings.vertical}px ${
-//           data.settings.blur
-//         }px rgba(${data.settings.shadowColor},${data.settings.opacity / 100})`
-//     )
-//   }
-// )
 
 export const { setModalVisibility, setModalData, saveApiData } = getDate.actions
 export default getDate.reducer
