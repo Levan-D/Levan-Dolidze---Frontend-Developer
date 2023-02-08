@@ -3,6 +3,32 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
 import axios from "axios"
 
+// export const getData = createAsyncThunk(
+//   "data/Get",
+//   async (
+//     {
+//       status,
+//       type,
+//       date = "",
+//       limit = 7,
+//       offset = 0,
+//     }: { status: string; type: string; date?: string; limit?: number; offset?: number },
+//     { rejectWithValue }
+//   ) => {
+//     try {
+//       const response = await axios({
+//         method: "GET",
+//         headers: { "Content-Type": "application/json", Accept: "application/json" },
+//         url: `https://api.spacexdata.com/v3/capsules?status=${status}&original_launch=${date}&type=${type}&limit=${limit}&offset=${offset}`,
+//         params: { prompt: prompt },
+//       })
+//       return response
+//     } catch (error) {
+//       return rejectWithValue(error)
+//     }
+//   }
+// )
+
 export const getData = createAsyncThunk(
   "data/Get",
   async (
@@ -15,13 +41,22 @@ export const getData = createAsyncThunk(
     }: { status: string; type: string; date?: string; limit?: number; offset?: number },
     { rejectWithValue }
   ) => {
+    const params = {
+      status: status,
+      type: type,
+      date: date,
+      limit: limit,
+      offset: offset,
+    }
+
     try {
       const response = await axios({
         method: "GET",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        url: `https://api.spacexdata.com/v3/capsules?status=${status}&original_launch=${date}&type=${type}&limit=${limit}&offset=${offset}`,
-        params: { prompt: prompt },
+        url: "http://localhost:3001/data",
+        params: params,
       })
+      console.log(response)
       return response
     } catch (error) {
       return rejectWithValue(error)
@@ -109,8 +144,8 @@ const getDate = createSlice({
         state.getDataStatus.success = true
         state.getDataStatus.initialLoad = false
 
-        if (action.payload.data.length > 0) {
-          state.data = action.payload.data
+        if (action.payload.data.response.length > 0) {
+          state.data = action.payload.data.response
           state.endOfPages = false
         } else state.endOfPages = true
       })
