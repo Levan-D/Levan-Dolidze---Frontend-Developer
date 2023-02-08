@@ -28,6 +28,7 @@ const Banner = () => {
         <img
           className="w-screen h-[600px] md:h-screen object-cover contrast-[1.05]"
           src={banner2k}
+          alt="capsule in orbit"
         ></img>
       </picture>
     </section>

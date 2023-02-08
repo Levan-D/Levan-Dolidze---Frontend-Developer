@@ -57,7 +57,7 @@ const Card = ({ capsule }: CardProps) => {
           <img
             className={` ${capsule.type === "Dragon 2.0" ? "w-40" : "w-52"} mx-auto`}
             src={capsule.type === "Dragon 2.0" ? c2 : c1}
-            alt=""
+            alt="capsule"
           />
         </div>
         <div className="text-center  font-semibold mt-4">Original launch:</div>
