@@ -37,6 +37,40 @@ export const getData = createAsyncThunk(
     }
   }
 )
+export const changePage = createAsyncThunk(
+  "page/Change",
+  async (
+    {
+      status,
+      type,
+      date = "",
+      limit = 7,
+      offset = 0,
+    }: { status: string; type: string; date?: string; limit?: number; offset?: number },
+    { rejectWithValue }
+  ) => {
+    const params = {
+      status: status,
+      type: type,
+      date: date,
+      limit: limit,
+      offset: offset,
+    }
+
+    try {
+      const response = await axios({
+        method: "GET",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        url: "http://localhost:3001/data",
+        params: params,
+      })
+
+      return response
+    } catch (error) {
+      return rejectWithValue(error)
+    }
+  }
+)
 
 interface Data {
   capsule_serial: string
@@ -96,6 +130,7 @@ const getDate = createSlice({
   name: "getDate",
   initialState,
   reducers: {
+    resetState: () => initialState,
     setModalVisibility: (state, action: PayloadAction<boolean>) => {
       state.modalVisibility = action.payload
     },
@@ -120,13 +155,44 @@ const getDate = createSlice({
 
         if (action.payload.data.response.length > 0) {
           state.data = action.payload.data.response
-          state.endOfPages = false
-        } else state.endOfPages = true
+        } else state.data = []
       })
       .addCase(getData.rejected, (state, action: PayloadAction<any>) => {
         state.getDataStatus.loading = false
         state.getDataStatus.error = true
+        state.data = []
+        state.getDataStatus.initialLoad = false
 
+        if (
+          action.payload.request?.status.toString().startsWith(4) ||
+          action.payload.request?.status.toString().startsWith(5)
+        ) {
+          state.getDataStatus.errorMessage = action.payload.message
+          state.getDataStatus.errorStatus = action.payload.request.status
+        } else state.getDataStatus.errorMessage = "Unknown Error"
+      })
+      .addCase(changePage.pending, state => {
+        state.getDataStatus.loading = true
+        state.getDataStatus.success = false
+        state.getDataStatus.error = false
+      })
+      .addCase(changePage.fulfilled, (state, action: PayloadAction<any>) => {
+        state.getDataStatus.loading = false
+        state.getDataStatus.success = true
+        state.getDataStatus.initialLoad = false
+
+        if (action.payload.data.response.length > 0) {
+          state.data = action.payload.data.response
+          state.endOfPages = false
+        } else if (action.payload.data.response.length === 0) {
+          state.endOfPages = true
+          state.apiData.offset = state.apiData.offset - 7
+        }
+      })
+      .addCase(changePage.rejected, (state, action: PayloadAction<any>) => {
+        state.getDataStatus.loading = false
+        state.getDataStatus.error = true
+        state.data = []
         state.getDataStatus.initialLoad = false
 
         if (
@@ -140,5 +206,6 @@ const getDate = createSlice({
   },
 })
 
-export const { setModalVisibility, setModalData, saveApiData } = getDate.actions
+export const { setModalVisibility, setModalData, saveApiData, resetState } =
+  getDate.actions
 export default getDate.reducer

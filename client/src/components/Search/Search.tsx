@@ -4,11 +4,10 @@ import { useState } from "react"
 //@ts-ignore
 import DateTimePicker from "react-datetime-picker"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { getData, saveApiData } from "../../slice/appSlice"
+import { getData, resetState, saveApiData } from "../../slice/appSlice"
 
 const Search = () => {
   const dispatch = useAppDispatch()
-  const { data } = useAppSelector(store => store.getData)
 
   const [status, setStatus] = useState("")
   const [type, setType] = useState("")
@@ -41,7 +40,7 @@ const Search = () => {
     if (date !== null) {
       launchDate = toIsoString(date)
     } else launchDate = undefined
-
+    dispatch(resetState())
     dispatch(getData({ status: status, type: type, date: launchDate, offset: 0 }))
     dispatch(saveApiData({ status: status, type: type, date: launchDate, offset: 0 }))
   }

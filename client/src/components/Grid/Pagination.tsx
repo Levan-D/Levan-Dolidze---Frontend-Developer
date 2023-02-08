@@ -1,7 +1,7 @@
 /** @format */
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { getData, saveApiData } from "../../slice/appSlice"
+import { changePage, saveApiData } from "../../slice/appSlice"
 
 const Pagination = () => {
   const dispatch = useAppDispatch()
@@ -15,7 +15,7 @@ const Pagination = () => {
 
   const handleNext = () => {
     if (!endOfPages) {
-      dispatch(getData({ status: status, type: type, date: date, offset: offset + 7 }))
+      dispatch(changePage({ status: status, type: type, date: date, offset: offset + 7 }))
       dispatch(
         saveApiData({ status: status, type: type, date: date, offset: offset + 7 })
       )
@@ -25,11 +25,11 @@ const Pagination = () => {
   const handlePrev = () => {
     if (offset !== 0) {
       dispatch(
-        getData({
+        changePage({
           status: status,
           type: type,
           date: date,
-          offset: endOfPages ? offset - 14 : offset - 7,
+          offset: offset - 7,
         })
       )
       dispatch(
@@ -37,7 +37,7 @@ const Pagination = () => {
           status: status,
           type: type,
           date: date,
-          offset: endOfPages ? offset - 14 : offset - 7,
+          offset: offset - 7,
         })
       )
     } else return
@@ -56,17 +56,7 @@ const Pagination = () => {
             >
               &#8592;
             </div>
-            {/* {pages.map((page, i) => (
-                <div
-                  key={i}
-                  onClick={() => handleClick(i)}
-                  className={`${
-                    currentPage === i + 1 ? "bg-slate-300 rounded-md text-slate-900 " : ""
-                  }  w-6 cursor-pointer text-center`}
-                >
-                  {page}
-                </div>
-              ))} */}
+
             <div
               onClick={handleNext}
               className={` ${
