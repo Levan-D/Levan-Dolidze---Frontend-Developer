@@ -49,7 +49,7 @@ const CardDisplay = () => {
       <div className=" flex flex-wrap  gap-8 justify-center">
         {data.length !== 0 &&
           data.map((capsule, i) => (
-            <div key={i} className=" mb-4 last:mb-0">
+            <div key={i} className=" mb-4 ">
               <Card capsule={capsule} />
             </div>
           ))}

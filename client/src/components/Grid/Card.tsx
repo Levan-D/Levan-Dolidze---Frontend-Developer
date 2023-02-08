@@ -29,7 +29,7 @@ const Card = ({ capsule }: CardProps) => {
   const renderArray = Object.entries(capsule)
 
   return (
-    <div className=" bg-slate-500  justify-between w-80 py-4 px-6 rounded-md border  border-slate-400 shadow-[2px_4px_4px_0px_rgba(0,0,0,0.20),inset_-2px_-2px_12px_0px_rgba(0,_0,_0,0.25)]">
+    <div className=" bg-slate-500 flex flex-col justify-between w-80 h-full py-4 px-6 rounded-md border  border-slate-400 shadow-[2px_4px_4px_0px_rgba(0,0,0,0.20),inset_-2px_-2px_12px_0px_rgba(0,_0,_0,0.25)]">
       <div className="flex justify-between">
         <div className="rounded-full font-semibold  px-4 text-slate-800 !bg-slate-200  ">
           {capsule.capsule_serial}
@@ -49,7 +49,7 @@ const Card = ({ capsule }: CardProps) => {
         </div>
       </div>
       <h3 className="font-bold  text-center text-xl mt-4">{capsule.type}</h3>
-      <div className="mb-6 mt-2 text-center">{capsule.details} </div>
+      <div className="mb-6 mt-2 text-center grow ">{capsule.details} </div>
       <div>
         <div
           className={`bg-slate-400 rounded-xl h-56 flex justify-center flex-col shadow-md`}
