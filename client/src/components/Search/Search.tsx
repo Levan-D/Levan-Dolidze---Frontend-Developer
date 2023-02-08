@@ -53,18 +53,18 @@ const Search = () => {
   }
 
   return (
-    <section id="form" className="bg-slate-400 py-8">
+    <section id="form" className="bg-slate-500 py-8">
       <form
         onSubmit={handleFormSubmit}
-        className=" w-fit  mx-auto  px-12 py-8 rounded-lg   bg-slate-300 shadow-[2px_4px_4px_0px_rgba(0,0,0,0.15),inset_-2px_-2px_12px_0px_rgba(0,_0,_0,0.20)]"
+        className=" w-fit  mx-auto  px-12 py-8 rounded-lg   bg-slate-800 shadow-[2px_4px_4px_0px_rgba(0,0,0,0.20),inset_-2px_-2px_12px_0px_rgba(255,_255,_255,0.15)]"
       >
-        <h2 className="text-center text-lg text-slate-800 font-semibold">
+        <h2 className="text-center text-lg text-slate-200 font-semibold">
           Select Capsule Status:
         </h2>
         <div className="text-center mt-2 mb-4">
           <select
             id="status"
-            className=" cursor-pointer px-4  w-60 py-2 rounded-lg bg-slate-800"
+            className=" cursor-pointer px-4  w-60 py-2 rounded-lg bg-slate-200  text-slate-800"
             value={status}
             onChange={onStatusChange}
             name="favColor"
@@ -77,13 +77,13 @@ const Search = () => {
           </select>
         </div>
 
-        <h2 className="text-center text-lg text-slate-800 font-semibold">
+        <h2 className="text-center text-lg text-slate-200 font-semibold">
           Select Capsule Type:
         </h2>
         <div className="text-center mt-2 mb-4">
           <div className="text-center ">
             <select
-              className=" cursor-pointer px-4  w-60 py-2 rounded-lg bg-slate-800"
+              className=" cursor-pointer px-4  w-60 py-2 rounded-lg bg-slate-200  text-slate-800"
               id="type"
               value={type}
               onChange={onTypeChange}
@@ -97,11 +97,11 @@ const Search = () => {
           </div>
         </div>
 
-        <h2 className="text-center text-lg text-slate-800 font-semibold">
+        <h2 className="text-center text-lg text-slate-200 font-semibold">
           Pick Launch Date:
         </h2>
         <DateTimePicker
-          className="text-slate-800 bg-white rounded-lg [&>*]:border-none left-[50%]  translate-x-[-50%] py-1 px-1  mt-2 mb-8 "
+          className="text-slate-800 bg-slate-200 rounded-lg [&>*]:border-none left-[50%]  translate-x-[-50%] py-1 px-1  mt-2 mb-8 "
           onChange={setDate}
           value={date}
         />
@@ -109,7 +109,7 @@ const Search = () => {
         <input
           type="submit"
           value="Submit"
-          className="block mx-auto px-14 text-lg py-2 bg-blue-500 cursor-pointer duration-200 hover:bg-blue-400 active:bg-blue-600 font-bold rounded-xl shadow-md"
+          className="block mx-auto px-14 text-lg py-2 bg-blue-500 cursor-pointer duration-200 hover:bg-blue-400 active:bg-blue-600 font-bold rounded-full shadow-md"
         />
       </form>
     </section>

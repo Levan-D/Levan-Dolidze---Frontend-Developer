@@ -15,8 +15,8 @@ const Banner = () => {
         </div>
 
         <a href={`#form`}>
-          <div className=" flex justify-between gap-8 w-fit mx-auto px-8 border-2 text-center py-2 rounded-lg mt-8  duration-200 text-lg  sm:hover:bg-slate-100  sm:hover:text-slate-900">
-            <div>Search</div> <div className="rotate-[180deg] sm:block hidden">&#94;</div>
+          <div className=" flex justify-between gap-8 w-fit mx-auto px-8 border-2 text-center py-2 rounded-full mt-8  duration-200 text-lg  sm:hover:bg-slate-100  sm:hover:text-slate-900">
+            <div>Explore</div>
           </div>
         </a>
       </div>
