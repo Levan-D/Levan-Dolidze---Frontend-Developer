@@ -8,7 +8,7 @@ import banner4k from "../assets/banner4k.png"
 const Banner = () => {
   return (
     <section className=" ">
-      <div className="absolute z-50  font-extrabold md:left-[10vh] md:top-[70vh] top-[20vh] left-[50%] w-max translate-x-[-50%] md:translate-x-[0] md:bg-transparent bg-[rgba(0,0,0,0.7)] p-4 rounded-lg">
+      <div className="absolute z-50  font-extrabold md:left-[10vh] md:top-[70vh] top-[200px] left-[50%] w-max translate-x-[-50%] md:translate-x-[0] md:bg-transparent bg-[rgba(0,0,0,0.7)] p-4 rounded-lg">
         <div className=" text-2xl sm:text-4xl"> To Infinity & Beyond!</div>
         <div className=" text-lg sm:text-2xl mt-4 md:text-left text-center">
           Scroll below to explore glossary <br /> of SpaceX capsule launches
