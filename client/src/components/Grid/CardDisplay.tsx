@@ -7,7 +7,8 @@ import { useAppSelector } from "../../app/hooks"
 const CardDisplay = () => {
   const {
     data,
-    getDataStatus: { error, errorMessage, errorStatus, success, initialLoad },
+
+    getDataStatus: { error, errorMessage, errorStatus, initialLoad, loading },
   } = useAppSelector(store => store.getData)
 
   if (error) {
@@ -16,6 +17,15 @@ const CardDisplay = () => {
         <div className="mt-28 text-center text-lg text-red-500">Error: {errorStatus}</div>
         <div className="text-center text-lg text-red-500 "> {errorMessage}</div>
         <div className="text-center  text-lg"> Please, try again later</div>
+      </div>
+    )
+  } else if (loading) {
+    return (
+      <div className=" mx-auto w-fit">
+        <div className="lds-ripple  ">
+          <div></div>
+          <div></div>
+        </div>
       </div>
     )
   } else if (data.length === 0 && initialLoad === true) {
